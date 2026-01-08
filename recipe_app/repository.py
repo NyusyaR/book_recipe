@@ -15,7 +15,7 @@ class RecipesRepository:
         try:
             if id_recipe <= 0 or not isinstance(id_recipe, int):
                 raise HTTPException(
-                    status_code=422, 
+                    status_code=422,
                     detail="Ошибка, id_recipe должен быть целым числом.",
                 )
             async with new_session() as session:
@@ -82,12 +82,11 @@ class RecipesRepository:
             except IntegrityError as err:
                 await session.rollback()
                 raise HTTPException(
-                    status_code=400, 
+                    status_code=400,
                     detail=f"Ошибка при создании рецепта: дублирование записей: {err}",
                 )
             except SQLAlchemyError as err:
                 await session.rollback()
                 raise HTTPException(
-                    status_code=500, 
-                    detail=f"Ошибка при сохранении рецепта: {err}"
+                    status_code=500, detail=f"Ошибка при сохранении рецепта: {err}"
                 )

@@ -5,7 +5,9 @@ class RecipesBase(BaseModel):
     name: str = Field(description="Название блюда")
     cooking_time: int = Field(gt=0, description="Время приготовления блюда")
     ingredients: str = Field(description="Ингридиенты блюда")
-    description: str = Field(description="Описание и этапы приготовления блюда")
+    description: str = Field(
+        description="Описание и этапы приготовления блюда"
+    )
     views_count: int = Field(default=0, description="Количнство просмотров")
 
 

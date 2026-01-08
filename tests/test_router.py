@@ -1,6 +1,7 @@
 import pytest
 from fastapi.testclient import TestClient
 from unittest.mock import AsyncMock
+import httpx
 
 from recipe_app.main import app
 from recipe_app.schemas import RecipeID

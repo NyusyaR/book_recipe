@@ -1,4 +1,4 @@
-fastapi
+fastapi==0.100
 uvicorn
 sqlalchemy
 aiosqlite
@@ -8,6 +8,6 @@ flake8==4.0.1
 flake8-bugbear==22.1.11
 flake8-pie==0.15.0
 isort==5.9.3
-mypy==0.931
+mypy==1.6
 pytest==7.0.1
 httpx

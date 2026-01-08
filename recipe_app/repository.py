@@ -1,4 +1,4 @@
-from typing import Optional, List
+from typing import Optional, List, Sequence
 from fastapi import HTTPException
 
 from sqlalchemy import select, update
@@ -36,7 +36,7 @@ class RecipesRepository:
             raise HTTPException(status_code=500, detail="Internal server error")
 
     @classmethod
-    async def find_all(cls) -> Optional[RecipesOrm]:
+    async def find_all(cls) -> Sequence[RecipesOrm]:
         """ Получение всех рецептов """
         async with new_session() as session:
             try:

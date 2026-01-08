@@ -4,19 +4,19 @@ from recope_app.schemas import RecipeAdd, RecipeID
 from recipe_app.repository import RecipesRepository
 
 
-router = APIRouter(
+routers = APIRouter(
     tags=['Рецепты'],
 )
 
 
-@router.get('/recipes/', response_model=list[RecipeID])
+@routers.get('/recipes/', response_model=list[RecipeID])
 async def get_recipes():
     """ Получение всех рецептов """
     recipes_orm = await RecipesRepository.find_all()
     return [RecipeID.model_validate(r) for r in recipes_orm]
 
 
-@router.get('/recipes/{id_recipe}', response_model=RecipeID)
+@routers.get('/recipes/{id_recipe}', response_model=RecipeID)
 async def get_one_recipe(id_recipe: int = Path(..., gt=0, description="ID рецепта должен быть больше 0")):
     """ Получение рецепта по ID
     Возращает экземпляр RecipeID или None, если рецепт не найден """
@@ -28,7 +28,7 @@ async def get_one_recipe(id_recipe: int = Path(..., gt=0, description="ID рец
     return validated_recipe
 
 
-@router.post('/recipes/', response_model=RecipeID)
+@routers.post('/recipes/', response_model=RecipeID)
 async def add_recipe(recipe: RecipeAdd):
     """ Добавление рецепта в БД
      Возвращает ID добавленного рецепта """

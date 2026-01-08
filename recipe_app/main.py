@@ -12,6 +12,7 @@ async def lifespan(app: FastAPI):  # контекстный менеджер
     yield
     print("Выключение")
 
+
 app = FastAPI(lifespan=lifespan)
 
 app.include_router(tasks_router)

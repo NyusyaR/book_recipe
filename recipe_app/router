@@ -1,6 +1,6 @@
 from fastapi import HTTPException, APIRouter, Path
 
-from recope_app.schemas import RecipeAdd, RecipeID
+from recipe_app.schemas import RecipeAdd, RecipeID
 from recipe_app.repository import RecipesRepository
 
 

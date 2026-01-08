@@ -36,7 +36,7 @@ class RecipesRepository:
             raise HTTPException(status_code=500, detail="Internal server error")
 
     @classmethod
-    async def find_all(cls) -> List[RecipesOrm]:
+    async def find_all(cls) -> Optional[RecipesOrm]:
         """ Получение всех рецептов """
         async with new_session() as session:
             try:

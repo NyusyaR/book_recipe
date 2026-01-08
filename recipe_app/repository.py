@@ -1,11 +1,11 @@
-from typing import Optional, List, Sequence
 from fastapi import HTTPException
+from typing import Optional, List, Sequence
 
 from sqlalchemy import select, update
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 
-from recipe_app.schemas import RecipeAdd, RecipeID
 from recipe_app.database import new_session, RecipesOrm
+from recipe_app.schemas import RecipeAdd, RecipeID
 
 
 class RecipesRepository:

@@ -33,7 +33,7 @@ async def get_one_recipe(
 @routers.post("/recipes/", response_model=RecipeID)
 async def add_recipe(recipe: RecipeAdd):
     """Добавление рецепта в БД
-     Возвращает ID добавленного рецепта"""
+    Возвращает ID добавленного рецепта"""
     try:
         recipe_add = await RecipesRepository.add_one(recipe)
         return recipe_add

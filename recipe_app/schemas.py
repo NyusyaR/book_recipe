@@ -11,13 +11,13 @@ class RecipesBase(BaseModel):
 
 class RecipeAdd(RecipesBase):
     """Что приходит от клиента при создании"""
-    
+
     pass
 
 
 class RecipeID(RecipesBase):
     """Что отдаем клиенту"""
-    
+
     id_recipe: int = Field(description="Идентификатор рецепта")
 
     class Config:

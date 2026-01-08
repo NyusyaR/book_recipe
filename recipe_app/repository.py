@@ -17,7 +17,7 @@ class RecipesRepository:
                 raise HTTPException(
                     status_code=422,
                     detail="Ошибка, id_recipe должен быть целым числом.",
-                    )
+                )
             async with new_session() as session:
                 query = select(RecipesOrm).where(RecipesOrm.id_recipe == id_recipe)
                 result = await session.execute(query)

@@ -1,5 +1,5 @@
-from fastapi import FastAPI
 from contextlib import asynccontextmanager
+from fastapi import FastAPI
 
 from recipe_app.database import create_tables
 from recipe_app.router import routers as tasks_router

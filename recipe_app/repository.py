@@ -15,7 +15,8 @@ class RecipesRepository:
         try:
             if id_recipe <= 0 or not isinstance(id_recipe, int):
                 raise HTTPException(
-                    status_code=422, detail="Ошибка, id_recipe должен быть целым числом."
+                    status_code=422, 
+                    detail="Ошибка, id_recipe должен быть целым числом."
                     )
             async with new_session() as session:
                 query = select(RecipesOrm).where(RecipesOrm.id_recipe == id_recipe)
@@ -35,9 +36,7 @@ class RecipesRepository:
         except HTTPException:
             raise
         except Exception:
-            raise HTTPException(
-                status_code=500, detail="Internal server error"
-            )
+            raise HTTPException(status_code=500, detail="Internal server error")
 
     @classmethod
     async def find_all(cls) -> Sequence[RecipesOrm]:
@@ -83,11 +82,11 @@ class RecipesRepository:
             except IntegrityError as err:
                 await session.rollback()
                 raise HTTPException(
-                    status_code=400, detail=f"Ошибка при создании рецепта: дублирование записей: {err}",
+                    status_code=400, 
+                    detail=f"Ошибка при создании рецепта: дублирование записей: {err}",
                 )
             except SQLAlchemyError as err:
                 await session.rollback()
                 raise HTTPException(
-                    status_code=500, 
-                    detail=f"Ошибка при сохранении рецепта: {err}"
+                    status_code=500, detail=f"Ошибка при сохранении рецепта: {err}"
                 )

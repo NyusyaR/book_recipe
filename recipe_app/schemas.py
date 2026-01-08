@@ -12,8 +12,6 @@ class RecipesBase(BaseModel):
 class RecipeAdd(RecipesBase):
     """Что приходит от клиента при создании"""
 
-    pass
-
 
 class RecipeID(RecipesBase):
     """Что отдаем клиенту"""

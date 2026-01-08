@@ -1,5 +1,5 @@
 from fastapi import HTTPException
-from typing import Optional, List, Sequence
+from typing import Optional, Sequence
 
 from sqlalchemy import select, update
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
@@ -19,12 +19,16 @@ class RecipesRepository:
                     detail="Ошибка, id_recipe должен быть целым числом.",
                 )
             async with new_session() as session:
-                query = select(RecipesOrm).where(RecipesOrm.id_recipe == id_recipe)
+                query = select(RecipesOrm).where(
+                    RecipesOrm.id_recipe == id_recipe
+                )
                 result = await session.execute(query)
                 recipe_orm = result.scalar_one_or_none()
 
                 if recipe_orm is None:
-                    raise HTTPException(status_code=404, detail="Рецепт не найден")
+                    raise HTTPException(
+                        status_code=404, detail="Рецепт не найден"
+                    )
 
                 await session.execute(
                     update(RecipesOrm)
@@ -36,7 +40,9 @@ class RecipesRepository:
         except HTTPException:
             raise
         except Exception:
-            raise HTTPException(status_code=500, detail="Internal server error")
+            raise HTTPException(
+                status_code=500, detail="Internal server error"
+            )
 
     @classmethod
     async def find_all(cls) -> Sequence[RecipesOrm]:
@@ -44,14 +50,16 @@ class RecipesRepository:
         async with new_session() as session:
             try:
                 query = select(RecipesOrm).order_by(
-                    RecipesOrm.views_count.desc(), RecipesOrm.cooking_time.asc()
+                    RecipesOrm.views_count.desc(), 
+                    RecipesOrm.cooking_time.asc()
                 )
                 result = await session.execute(query)
                 recipe_model = result.scalars().all()
                 return recipe_model
             except Exception:
                 raise HTTPException(
-                    status_code=500, detail="Ошибка сервера при обработке запроса."
+                    status_code=500, 
+                    detail="Ошибка сервера при обработке запроса."
                 )
 
     @classmethod
@@ -69,7 +77,8 @@ class RecipesRepository:
             existing_recipe = await cls.find_by_name(name.name)
             if existing_recipe:
                 raise HTTPException(
-                    status_code=500, detail="Рецепт с таким названием уже существует"
+                    status_code=500, 
+                    detail="Рецепт с таким названием уже существует"
                 )
 
             recipe_dict = name.model_dump(exclude_unset=True)
@@ -83,10 +92,12 @@ class RecipesRepository:
                 await session.rollback()
                 raise HTTPException(
                     status_code=400,
-                    detail=f"Ошибка при создании рецепта: дублирование записей: {err}",
+                    detail=f"Ошибка при создании рецепта: "
+                    f"дублирование записей: {err}",
                 )
             except SQLAlchemyError as err:
                 await session.rollback()
                 raise HTTPException(
-                    status_code=500, detail=f"Ошибка при сохранении рецепта: {err}"
+                    status_code=500, 
+                    detail=f"Ошибка при сохранении рецепта: {err}"
                 )

@@ -16,7 +16,7 @@ class RecipesRepository:
             if id_recipe <= 0 or not isinstance(id_recipe, int):
                 raise HTTPException(
                     status_code=422, 
-                    detail="Ошибка, id_recipe должен быть целым числом."
+                    detail="Ошибка, id_recipe должен быть целым числом.",
                 )
             async with new_session() as session:
                 query = select(RecipesOrm).where(RecipesOrm.id_recipe == id_recipe)
@@ -69,8 +69,7 @@ class RecipesRepository:
             existing_recipe = await cls.find_by_name(name.name)
             if existing_recipe:
                 raise HTTPException(
-                    status_code=500, 
-                    detail="Рецепт с таким названием уже существует"
+                    status_code=500, detail="Рецепт с таким названием уже существует"
                 )
 
             recipe_dict = name.model_dump(exclude_unset=True)
@@ -84,7 +83,7 @@ class RecipesRepository:
                 await session.rollback()
                 raise HTTPException(
                     status_code=400, 
-                    detail=f"Ошибка при создании рецепта: дублирование записей: {err}"
+                    detail=f"Ошибка при создании рецепта: дублирование записей: {err}",
                 )
             except SQLAlchemyError as err:
                 await session.rollback()

@@ -19,15 +19,14 @@ async def get_recipes():
 @routers.get("/recipes/{id_recipe}", response_model=RecipeID)
 async def get_one_recipe(
     id_recipe: int = Path(..., gt=0, description="ID рецепта должен быть больше 0")
-):
+): # noqa: B008
     """Получение рецепта по ID
     Возращает экземпляр RecipeID или None, если рецепт не найден"""
     recipe = await RecipesRepository.find_one(id_recipe)
     if recipe is None:
         raise HTTPException(status_code=404, detail="Not Found")
 
-    validated_recipe = RecipeID.model_validate(recipe.__dict__)
-    return validated_recipe
+    return RecipeID.model_validate(recipe.__dict__)
 
 
 @routers.post("/recipes/", response_model=RecipeID)
@@ -35,7 +34,6 @@ async def add_recipe(recipe: RecipeAdd):
     """Добавление рецепта в БД
     Возвращает ID добавленного рецепта"""
     try:
-        recipe_add = await RecipesRepository.add_one(recipe)
-        return recipe_add
+        return await RecipesRepository.add_one(recipe)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

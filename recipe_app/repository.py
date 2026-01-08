@@ -8,7 +8,7 @@ from recipe_app.database import new_session, RecipesOrm
 from recipe_app.schemas import RecipeAdd, RecipeID
 
 
-class RecipesRepository:
+class RecipesRepository: # noqa: PIE798
     @classmethod
     async def find_one(cls, id_recipe) -> Optional[RecipeID]:
         """Получение детальной информации по заданному ID рецепта"""
@@ -47,8 +47,7 @@ class RecipesRepository:
                     RecipesOrm.views_count.desc(), RecipesOrm.cooking_time.asc()
                 )
                 result = await session.execute(query)
-                recipe_model = result.scalars().all()
-                return recipe_model
+                return result.scalars().all()
             except Exception:
                 raise HTTPException(
                     status_code=500, detail="Ошибка сервера при обработке запроса."

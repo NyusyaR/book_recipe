@@ -8,7 +8,7 @@ from recipe_app.database import new_session, RecipesOrm
 from recipe_app.schemas import RecipeAdd, RecipeID
 
 
-class RecipesRepository: # noqa: PIE798
+class RecipesRepository:  # noqa: PIE798
     @classmethod
     async def find_one(cls, id_recipe) -> Optional[RecipeID]:
         """Получение детальной информации по заданному ID рецепта"""

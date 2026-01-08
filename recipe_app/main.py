@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from contextlib import asynccontextmanager
 
 from recipe_app.database import create_tables
-from recipe_app.router import router as tasks_router
+from recipe_app.router import routers as tasks_router
 
 
 @asynccontextmanager

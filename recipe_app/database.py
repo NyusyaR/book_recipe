@@ -16,9 +16,7 @@ class Model(DeclarativeBase):
 class RecipesOrm(Model):
     __tablename__ = "receipt"
 
-    id_recipe: Mapped[int] = mapped_column(
-        primary_key=True, autoincrement=True
-    )
+    id_recipe: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     name: Mapped[str]
     cooking_time: Mapped[int]
     ingredients: Mapped[str]

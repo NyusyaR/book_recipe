@@ -18,10 +18,7 @@ async def get_recipes():
 
 @routers.get("/recipes/{id_recipe}", response_model=RecipeID)
 async def get_one_recipe(
-    id_recipe: int = Path(..., 
-                          gt=0, 
-                          description="ID рецепта должен быть больше 0"
-                         )
+    id_recipe: int = Path(..., gt=0, description="ID рецепта должен быть больше 0")
 ):
     """Получение рецепта по ID
     Возращает экземпляр RecipeID или None, если рецепт не найден"""

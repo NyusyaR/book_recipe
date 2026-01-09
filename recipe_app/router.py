@@ -1,5 +1,3 @@
-from typing import Annotated
-
 from fastapi import APIRouter, HTTPException, Path
 
 from recipe_app.schemas import RecipeAdd, RecipeID

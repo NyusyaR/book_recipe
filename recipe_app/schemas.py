@@ -17,5 +17,5 @@ class RecipeID(RecipesBase):
     """Что отдаем клиенту"""
 
     id_recipe: int = Field(description="Идентификатор рецепта")
-    
+
     model_config = ConfigDict(from_attributes=True)

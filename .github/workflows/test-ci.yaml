@@ -40,6 +40,6 @@ jobs:
       - name: Run flake8
         run: |
           flake8 recipe_app/ \
-          --max-line-length=88 \
-          --extend-ignore=E203,W503 \
-          --per-file-ignores=recipe_app/router.py:B008,recipe_app/api.py:B008
+            --max-line-length=88 \
+            --extend-ignore=E203,W503 \
+            --per-file-ignores=recipe_app/router.py:B008,recipe_app/api.py:B008
